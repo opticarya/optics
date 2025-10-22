@@ -1,1 +1,373 @@
-hi
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Personal homepage — portfolio, projects, publications, and contact." />
+  <title>Your Name — Portfolio</title>
+
+  <!-- Basic styling (responsive, accessible, modern) -->
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #4f9ef1;
+      --glass: rgba(255,255,255,0.04);
+      --radius: 12px;
+      --max-width: 1000px;
+      --gap: 20px;
+      color-scheme: dark;
+    }
+
+    /* Light theme override (switch with .light on <html>) */
+    .light {
+      --bg: #f7fafc;
+      --card: #ffffff;
+      --muted: #4a5568;
+      --accent: #0b63d3;
+      --glass: rgba(10,10,10,0.02);
+      color-scheme: light;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg), #071021 70%);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      display:flex;
+      justify-content:center;
+      padding:32px;
+    }
+
+    .wrap{
+      width:100%;
+      max-width:var(--max-width);
+      margin:0 auto;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:var(--gap);
+      margin-bottom:28px;
+    }
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--accent), #7ad0ff);
+      color: #042033;
+      font-weight:700;
+      font-size:18px;
+      box-shadow: 0 6px 18px rgba(2,8,23,0.6);
+    }
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    nav{display:flex;gap:12px;align-items:center}
+    .navlink{
+      background:transparent;
+      border:1px solid transparent;
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      color:inherit;
+      font-size:14px;
+    }
+    .navlink:hover{background:var(--glass)}
+    .primary{
+      background:linear-gradient(90deg,var(--accent), #6fb8ff);
+      color:#041828;
+      box-shadow:0 6px 14px rgba(12,35,60,0.45);
+      border:0;
+    }
+
+    main{display:grid;gap:28px}
+    .hero{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:var(--radius);
+      padding:28px;
+      display:grid;
+      grid-template-columns: 1fr 340px;
+      gap:24px;
+      align-items:center;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 30px rgba(2,8,23,0.6);
+    }
+
+    .intro h2{margin:0 0 8px 0;font-size:26px}
+    .intro p.lead{margin:0 0 16px 0;color:var(--muted)}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.05);color:inherit}
+    .btn-primary{background:linear-gradient(90deg,var(--accent), #7ad0ff);color:#042033}
+
+    .profile{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+      display:flex;flex-direction:column;align-items:center;gap:12px;
+    }
+    .avatar{
+      width:140px;height:140px;border-radius:14px;
+      display:grid;place-items:center;font-size:48px;font-weight:700;
+      background:linear-gradient(135deg,#17324a, #0b2233);
+      box-shadow: 0 8px 24px rgba(4,10,20,0.6);
+    }
+    .small{font-size:13px;color:var(--muted);text-align:center}
+
+    /* Grid of cards */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:16px;
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .card h3{margin:0 0 10px 0;font-size:16px}
+    .muted{color:var(--muted);font-size:13px}
+
+    footer{
+      margin-top:18px;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      color:var(--muted);font-size:13px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width:900px){
+      .hero{grid-template-columns: 1fr}
+      header{flex-direction:column;align-items:flex-start;gap:12px}
+    }
+
+    /* small utilities */
+    .meta {display:flex;gap:8px;flex-wrap:wrap}
+    .pill{background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:999px;font-size:13px}
+    .project-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02)}
+    .pub-list{list-style:none;padding:0;margin:0}
+    .pub-list li{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.02)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</head>
+<body>
+  <div class="wrap" role="document">
+    <header>
+      <a class="brand" href="#" aria-label="Go to homepage">
+        <div class="logo" aria-hidden="true">YN</div>
+        <div>
+          <h1>Your Name</h1>
+          <p>Optics · Imaging · Research</p>
+        </div>
+      </a>
+
+      <nav aria-label="Primary navigation">
+        <a class="navlink" href="#about">About</a>
+        <a class="navlink" href="#projects">Projects</a>
+        <a class="navlink" href="#publications">Publications</a>
+        <a class="navlink" href="#contact">Contact</a>
+        <a class="navlink primary" href="#resume">Resume</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="intro">
+          <h2 id="hero-heading">Hi — I’m Your Name. I build optical + imaging systems.</h2>
+          <p class="lead">PhD candidate / researcher working on retinal imaging, fluidic lenses, and multispectral systems. I make hardware, software, and reproducible experiments that advance imaging science.</p>
+
+          <div class="cta-row" role="group" aria-label="Primary actions">
+            <a class="btn btn-primary" href="#projects">View projects</a>
+            <a class="btn btn-ghost" href="#publications">See publications</a>
+            <a class="btn btn-ghost" href="resume.pdf" id="resume" download>Download resume</a>
+          </div>
+
+          <div style="margin-top:18px" class="meta">
+            <span class="pill">Python • MATLAB • ZEMAX</span>
+            <span class="pill">Open-source friendly</span>
+            <span class="pill">Available for collaboration</span>
+          </div>
+        </div>
+
+        <aside class="profile" aria-label="Profile">
+          <div class="avatar" aria-hidden="true">YN</div>
+          <div style="text-align:center">
+            <div style="font-weight:700">Your Name</div>
+            <div class="small">4th-year PhD — Retinal imaging · Optical engineering</div>
+          </div>
+
+          <div style="width:100%;display:flex;gap:8px;justify-content:center">
+            <a class="btn btn-ghost" href="mailto:you@example.com" title="Email">Email</a>
+            <a class="btn btn-ghost" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+          </div>
+
+          <div class="small">Based in Tucson, AZ</div>
+        </aside>
+      </section>
+
+      <!-- CARDS GRID -->
+      <section style="display:grid;gap:16px;grid-template-columns:1fr 360px;">
+        <div>
+          <!-- Projects -->
+          <div class="card" id="projects" aria-labelledby="projects-heading">
+            <h3 id="projects-heading">Selected projects</h3>
+
+            <div class="grid" style="margin-top:12px">
+              <article class="card" aria-labelledby="p1">
+                <h4 id="p1">Multispectral Retinal Imager</h4>
+                <p class="muted">Custom multispectral camera + fluidic lens for spectral contrast imaging and registration.</p>
+                <div class="project-tags">
+                  <span class="tag">ZEMAX</span>
+                  <span class="tag">MATLAB</span>
+                  <span class="tag">Hardware</span>
+                </div>
+              </article>
+
+              <article class="card" aria-labelledby="p2">
+                <h4 id="p2">Real-time Focus Control</h4>
+                <p class="muted">Closed-loop focus system using adaptive fluidic lens and simple control firmware for quick acquisition.</p>
+                <div class="project-tags">
+                  <span class="tag">Embedded</span>
+                  <span class="tag">Control</span>
+                </div>
+              </article>
+
+              <article class="card" aria-labelledby="p3">
+                <h4 id="p3">Open Lab Toolkit</h4>
+                <p class="muted">Scripts and measurement templates to standardize optical bench experiments and reproducible metrology.</p>
+                <div class="project-tags">
+                  <span class="tag">Open-source</span>
+                  <span class="tag">Data</span>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- Publications -->
+          <div class="card" id="publications" aria-labelledby="pub-heading" style="margin-top:16px">
+            <h3 id="pub-heading">Recent publications</h3>
+            <p class="muted" style="margin-top:6px">Selected peer-reviewed or preprint work.</p>
+            <ul class="pub-list" style="margin-top:12px">
+              <li>
+                <strong>Lastname, Y.</strong> (2025). Title of paper on retinal multispectral imaging. <span class="muted">Journal / preprint</span>
+              </li>
+              <li>
+                <strong>Lastname, Y.</strong> (2024). Fluidic lens control for rapid focal tuning. <span class="muted">Conference / proceedings</span>
+              </li>
+              <li>
+                <strong>Lastname, Y.</strong> (2023). Open toolkit for optical metrology. <span class="muted">Repository / dataset</span>
+              </li>
+            </ul>
+            <div style="margin-top:12px">
+              <a class="navlink" href="#" aria-label="View all publications">View all →</a>
+            </div>
+          </div>
+
+          <!-- About -->
+          <div class="card" id="about" style="margin-top:16px">
+            <h3>About</h3>
+            <p class="muted" style="margin-top:8px">I’m a PhD candidate researching retinal imaging. I enjoy designing compact optical systems, building reproducible experiments, and sharing code and hardware designs. My work spans simulation (ZEMAX/Code V), modeling (MATLAB / Python), and hands-on lab measurements.</p>
+
+            <div style="margin-top:12px" class="meta">
+              <span class="pill">Available for workshops</span>
+              <span class="pill">Open to collaboration</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: contact + social + quick links -->
+        <aside style="display:flex;flex-direction:column;gap:16px">
+          <div class="card" id="contact" aria-labelledby="contact-heading">
+            <h3 id="contact-heading">Contact</h3>
+            <p class="muted">I'm happy to discuss collaborations, talks, or open positions.</p>
+
+            <!-- Simple contact — GitHub Pages cannot process POST forms without external service -->
+            <form style="margin-top:12px" onsubmit="return sendMail();">
+              <label class="sr-only" for="name">Name</label>
+              <input id="name" name="name" placeholder="Your name" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin-bottom:10px;background:transparent;color:inherit" required>
+
+              <label class="sr-only" for="email">Email</label>
+              <input id="email" name="email" placeholder="you@example.com" type="email" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);margin-bottom:10px;background:transparent;color:inherit" required>
+
+              <label class="sr-only" for="message">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Brief message" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" required></textarea>
+
+              <div style="display:flex;gap:8px;margin-top:10px">
+                <button class="btn btn-primary" type="submit">Send email</button>
+                <a class="btn btn-ghost" href="mailto:you@example.com">Or email directly</a>
+              </div>
+            </form>
+
+            <p class="muted" style="margin-top:8px;font-size:12px">Note: this form opens your email client. To accept form submissions directly on the site, integrate with a form service (Formspree, Netlify Forms, etc.).</p>
+          </div>
+
+          <div class="card" aria-labelledby="links-heading">
+            <h3 id="links-heading">Quick links</h3>
+            <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+              <a class="navlink" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+              <a class="navlink" href="https://scholar.google.com/" target="_blank" rel="noopener">Google Scholar</a>
+              <a class="navlink" href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+
+          <div class="card" aria-labelledby="skills-heading">
+            <h3 id="skills-heading">Skills</h3>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+              <div class="muted">Optical design · Imaging systems · Electronics</div>
+              <div class="muted">MATLAB · Python · ZEMAX · Embedded C</div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <footer>
+        <div>© <span id="year"></span> Your Name</div>
+        <div class="muted">Built with HTML · CSS · ❤️ — Hosted on GitHub Pages</div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple "send" behaviour: open mail client with prefilled content
+    function sendMail(){
+      var name = document.getElementById('name').value || 'Message';
+      var email = document.getElementById('email').value || '';
+      var msg = document.getElementById('message').value || '';
+      var subject = encodeURIComponent('Website message from ' + name);
+      var body = encodeURIComponent(msg + '\n\n— Reply to: ' + email);
+      window.location.href = 'mailto:you@example.com?subject=' + subject + '&body=' + body;
+      return false;
+    }
+
+    // Optional: toggle theme based on user preference (prefers-color-scheme)
+    (function(){
+      try {
+        var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        if(prefersLight) document.documentElement.classList.add('light');
+      } catch(e){}
+    })();
+  </script>
+</body>
+</html>
